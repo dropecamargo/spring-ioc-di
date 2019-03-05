@@ -17,4 +17,14 @@ public class TrackCoach implements Coach {
 	public String getDailyFortune() {
 		return this.getClass().getName() + " -> " + fortuneService.getFortune();
 	}
+	
+	// Init method
+	public void doMyStartStuff() {
+		System.out.println("TrackCoach start method doMyStartStuff");
+	}
+	
+	// Destroy method
+	public void doMyDestroyStuff() {
+		System.out.println("TrackCoach clean method doMyDestroyStuff");
+	}
 }

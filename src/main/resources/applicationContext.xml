@@ -7,6 +7,9 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
 	
+	<!-- Load properties file -->
+	<context:property-placeholder location="classpath:application.properties" />
+	
 	<!-- 
 		Add a logger config to see logging messages.		
 		- For more detailed logs, set values to "FINEST"
@@ -25,12 +28,24 @@
     <bean id="mySoccerCoach"
     	class="com.pcamargo.demo.SoccerCoach">
     	<property name="fortuneService" ref="myFortune" />
-		<property name="emailAddress" value="dropecamargo@gmail.com" />
-		<property name="team" value="Team MetroCuadrado" />
+		<property name="emailAddress" value="${foo.email}" />
+		<property name="team" value="${foo.team}" />
     </bean>
 	
+	<!-- Scopes:
+		Singleton: Singleton, only one instance
+		Prototype: Multiple instances
+	 -->
 	<bean id="myCoach" 
-		class="com.pcamargo.demo.BaseballCoach">
+		class="com.pcamargo.demo.BaseballCoach"
+		scope="prototype">
 		<constructor-arg ref="myFortune"/>
 	</bean>    
+	
+	<bean id="myTrackCoach" 
+		class="com.pcamargo.demo.TrackCoach"
+		init-method="doMyStartStuff"
+		destroy-method="doMyDestroyStuff">
+		<constructor-arg ref="myFortune"/>
+	</bean>
 </beans>
